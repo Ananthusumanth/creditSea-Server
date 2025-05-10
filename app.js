@@ -2,7 +2,7 @@ const express = require("express")
 const { ObjectId, MongoClient } = require('mongodb');
 const cors = require('cors');
 const app = express();
-
+const {format} = require("date-fns")
 app.use(express.json());
 app.use(cors());
 
@@ -46,7 +46,7 @@ app.post('/AppForm', async (request, response) => {
     try {
         const collection = client.db('creditSea').collection('verificationData');
         const {name, Loan, Reason, address, LoanINMOnths, status} = request.body
-        const alreadyEmailIN = await collection.insertOne({name: name, Loan: Loan, Reason: Reason, address: address, LoanINMOnths: LoanINMOnths, status: status});
+        const alreadyEmailIN = await collection.insertOne({name: name, Loan: Loan, Reason: Reason, address: address, LoanINMOnths: LoanINMOnths, status: status, Date: format(new Date(), "MMM dd yyyy")  });
         response.status(200)
         response.send("Successfully updated");
     } catch (error) {
@@ -54,3 +54,5 @@ app.post('/AppForm', async (request, response) => {
         response.send({ "Internal server error:": error });
     }
 });
+
+module.export = app
