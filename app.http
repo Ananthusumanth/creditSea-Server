@@ -1,0 +1,15 @@
+GET http://localhost:3000/
+
+###
+
+POST http://localhost:3000/AppForm
+Content-Type: application/json
+
+{
+    "name": "sun",
+    "Loan": "10,000",
+    "Reason": "To Help",
+    "address": "godavari",
+    "LoanINMOnths": "3",
+    "status": "VERIFIED"
+}
